@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Aerglo-Clinic Dashboard</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" crossorigin="anonymous"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="css/dashboard.css" type="text/css" />
+  </head>
+<body>
+    <div class="topbar">
+    <nav class="topbar-main mt-4 pb-0">  
+        <div class="topbar-left">
+            <a href="#" class="logo">
+                <h4>
+                    Aerglo-Clinic
+                </h4>
+            </a>
+        </div>
+        <ul class="list-unstyled topbar-nav float-right mb-0">
+            <li>
+                <a class="btn btn-link" href="/dlogin"><i class="dripicons-exit text-muted mr-2"></i> Logout</a>
+            </li>
+            <li class="menu-item">
+                <a class="navbar-toggle nav-link" id="mobileToggle">
+                    <div class="lines">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </a>
+            </li>   
+        </ul>
+    </nav>
+</div>
+
+    <div class="page-wrapper">
+
+        <div class="page-content">
+
+            <div class="container-fluid">
+                <div class="row">
+                    <!-- <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="text-bold mb-2 text-center">Total Consultations</h4>
+                                    <div class="align-self-center">
+                                        <div class="text-center">
+                                            <div class="icon-info mb-3 d-inline">
+                                                <i class="fas fa-hospital bg-soft-info"></i>
+                                            </div>                                                &nbsp;&nbsp;&nbsp;
+                                            <h2 class="mt-0 font-weight-bold d-inline"></h2> 
+                                        </div>
+                                    </div>
+                            </div>                                                                                             
+                        </div>
+                    </div> -->
+                    <div class="col-lg-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="mt-0 header-title text-center">Total Doctors</h4>
+                                    <div class="align-self-center">
+                                        <div class="text-center">
+                                            <div class="icon-info mb-3">
+                                                <i class="fas fa-hospital bg-soft-info"></i>
+                                            </div>                                                
+                                            <h2 class="mt-0 font-weight-bold"><%=doctorCount%></h2> 
+                                        </div>
+                                    </div>
+                            </div>                                                                                             
+                        </div>
+                    </div>       
+                    <div class="col-lg-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="mt-0 header-title text-center">Total Patients</h4>
+                                <div class="align-self-center">
+                                        <div class="text-center">
+                                            <div class="icon-info mb-3">
+                                                <i class="fas fa-procedures bg-soft-info"></i>
+                                            </div>                                                
+                                            <h2 class="mt-0 font-weight-bold"><%=consultationCount%></h2> 
+                                        </div>
+                                    </div>
+                            </div>                                                                                             
+                        </div>
+                    </div>       
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-body">                                    
+                                        <div class="text-center">
+                                            <!-- <i class="d-inline fa fa-cloud" style="font-size: 55px;" ></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <h2 class="d-inline ">27°</h2>
+                                            <h4 class="title-text">Belgaum,Karnataka</h4> -->
+                                            <i class="fas fa-user-nurse bg-soft-info" style="font-size: 70px;border-radius: 50%;"></i>
+                                            <h4 class="text-bold mb-2">Welcome to Aerglo-Clinic</h4>
+                                            <h4 class="text-bold mb-2">Doctor <%=username%></h4>
+                                    </div><!--end col-->
+                                </div>
+                            </div> 
+                        </div>
+                    </div>                       
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="header-title mt-0 mb-3">Scheduled</h4>                   
+                                <div class="table-responsive">
+                                    <table id="datatable" class="table">
+                                        <thead class="thead-light">
+                                        <tr>
+                                            <th>Patient Name</th>
+                                            <th>Mobile Number</th>  
+                                            <th>Doctor</th>
+                                            <th>Department</th>     
+                                            <th>Date</th>
+                                            <th>Time</th>
+                                            <th>Symptoms</th>
+                                            <th>Actions</th>                                                
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% unscheduled && unscheduled.forEach(function(p) { %>
+                                                <tr>
+                                                    <td><img src="images/users/user-1.jpg" alt="" class="thumb-sm rounded-circle mr-2"><%=p.patientName%></td>                                                
+                                                    <td><%=p.patientMobile%></td>                                                
+                                                    <td><%=p.username%></td>
+                                                    <td><%=p.department %></td>                                               
+                                                    <td><%=p.date%></td>
+                                                    <td><%=p.time%></td>
+                                                    <td><%=p.symptoms%></td> 
+                                                    <td class="text-left">                                                       
+                                                        <a href="/complete?id=<%=p._id%>&username=<%=p.username%>" class="btn btn-primary px-4 ml-3 mb-3"><i class="fas fa-check text-success font-16"></i></a>
+                                                    </td>
+                                                </tr>
+                                                <% }); %>
+                                        </tbody>
+                                    </table>                    
+                                </div>                                         
+
+                            </div> 
+                        </div> 
+                    </div>                               
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="header-title mt-0 mb-3">Completed</h4>                   
+                                <div class="table-responsive">
+                                    <table id="datatable" class="table">
+                                        <thead class="thead-light">
+                                        <tr>
+                                            <th>Patient Name</th>
+                                            <th>Mobile Number</th>  
+                                            <th>Date</th>
+                                            <th>Doctor</th>
+                                            <th>Time</th>
+                                            <th>Condition</th>
+                                            <th>Department</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% completed && completed.forEach(function(p) { %>
+                                                <tr>
+                                                    <td><img src="images/users/user-1.jpg" alt="" class="thumb-sm rounded-circle mr-2"><%=p.patientName%></td>                                                
+                                                    <td><%=p.patientMobile%></td>                                                
+                                                    <td><%=p.date%></td>
+                                                    <td><%=p.username%></td>
+                                                    <td><%=p.time%></td>
+                                                    <td><%=p.symptoms%></td> 
+                                                    <td><%=p.department %></td>                                               
+                                                </tr>
+                                                <% }); %>
+                                        </tbody>
+                                    </table>                    
+                                </div>                                         
+                            </div> 
+                        </div> 
+                    </div>                               
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<%- include("homeFoot") -%>

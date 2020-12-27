@@ -1,0 +1,30 @@
+version: '3.8'
+
+services: 
+    mongo:
+        container_name: clinic-database
+        image: mongo
+        command: mongod --port 27018
+        ports: 
+            - '27018:27018'
+        volumes: 
+            - mongodb-volume:/data/db
+        networks: 
+            - overlay
+
+    server:
+        container_name: server
+        restart: always
+        image: shreyasssk/clinic-server
+        ports: 
+            - '3000:3000'
+        depends_on:
+            - mongo
+        networks: 
+            - overlay
+
+volumes: 
+    mongodb-volume:
+            
+networks: 
+    overlay:
