@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Aerglo-Clinic Dashboard</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" crossorigin="anonymous"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="css/dashboard.css" type="text/css" />
+  </head>
+<body>
+    <div class="topbar">
+    <nav class="topbar-main mt-4 pb-0">  
+        <div class="topbar-left">
+            <a href="#" class="logo">
+                <h4>
+                    Aerglo-Clinic
+                </h4>
+            </a>
+        </div>
+        <ul class="list-unstyled topbar-nav float-right mb-0">
+            <li>
+                <a class="btn btn-link" href="/plogin"><i class="dripicons-exit text-muted mr-2"></i> Logout</a>
+            </li>
+            <li class="menu-item">
+                <a class="navbar-toggle nav-link" id="mobileToggle">
+                    <div class="lines">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </a>
+            </li>   
+        </ul>
+    </nav>
+</div>
+
+    <div class="page-wrapper">
+
+        <div class="page-content">
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="text-bold mb-2 text-center">Total Consultations</h4>
+                                    <div class="align-self-center">
+                                        <div class="text-center">
+                                            <div class="icon-info mb-3 d-inline">
+                                                <i class="fas fa-hospital bg-soft-info"></i>
+                                            </div>                                                &nbsp;&nbsp;&nbsp;
+                                            <h2 class="mt-0 font-weight-bold d-inline"><%= patientCount %></h2> 
+                                        </div>
+                                    </div>
+                            </div>                                                                                             
+                        </div>
+                    </div>
+                    <!-- <div class="col-lg-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="mt-0 header-title text-center">Total Doctors</h4>
+                                    <div class="align-self-center">
+                                        <div class="text-center">
+                                            <div class="icon-info mb-3">
+                                                <i class="fas fa-hospital bg-soft-info"></i>
+                                            </div>                                                
+                                            <h2 class="mt-0 font-weight-bold">6</h2> 
+                                        </div>
+                                    </div>
+                            </div>                                                                                             
+                        </div>
+                    </div>       
+                    <div class="col-lg-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="mt-0 header-title text-center">Total Patients</h4>
+                                <div class="align-self-center">
+                                        <div class="text-center">
+                                            <div class="icon-info mb-3">
+                                                <i class="fas fa-procedures bg-soft-info"></i>
+                                            </div>                                                
+                                            <h2 class="mt-0 font-weight-bold">18</h2> 
+                                        </div>
+                                    </div>
+                            </div>                                                                                             
+                        </div>
+                    </div>        -->
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-body">                                    
+                                        <div class="text-center">
+                                            <!-- <i class="d-inline fa fa-cloud" style="font-size: 55px;" ></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <h2 class="d-inline ">27°</h2>
+                                            <h4 class="title-text">Belgaum,Karnataka</h4> -->
+                                            <h4 class="text-bold mb-2">Welcome to Aerglo-Clinic</h4>
+                                            <button type="button" class="btn btn-primary px-4 mt-0 mb-3" data-toggle="modal" data-animation="bounce" data-target=".bs-example-modal-lg"><i class="mdi mdi-plus-circle-outline mr-2"></i>Add New Shedule</button>
+                                    </div><!--end col-->
+                                </div>
+                            </div> 
+                        </div>
+                    </div>                       
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="header-title mt-0 mb-3">Scheduled</h4>                   
+                                <div class="table-responsive">
+                                    <table id="datatable" class="table">
+                                        <thead class="thead-light">
+                                        <tr>
+                                            <th>Patient Name</th>
+                                            <th>Mobile Number</th>  
+                                            <th>Date</th>
+                                            <th>Doctor</th>
+                                            <th>Time</th>
+                                            <th>Condition</th>
+                                            <th>Department</th>     
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% unscheduled && unscheduled.forEach(function(p) { %>
+                                                <tr>
+                                                    <td><img src="images/users/user-1.jpg" alt="" class="thumb-sm rounded-circle mr-2"><%=p.patientName%></td>                                                
+                                                    <td><%=p.patientMobile%></td>                                                
+                                                    <td><%=p.date%></td>
+                                                    <td><%=p.username%></td>
+                                                    <td><%=p.time%></td>
+                                                    <td><%=p.symptoms%></td> 
+                                                    <td><%=p.department %></td>                                               
+                                                </tr>
+                                                <% }); %>
+                                        </tbody>
+                                    </table>                    
+                                </div>                                         
+
+                            </div> 
+                        </div> 
+                    </div>                               
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="header-title mt-0 mb-3">Completed</h4>                   
+                                <div class="table-responsive">
+                                    <table id="datatable" class="table">
+                                        <thead class="thead-light">
+                                        <tr>
+                                            <th>Patient Name</th>
+                                            <th>Mobile Number</th>  
+                                            <th>Date</th>
+                                            <th>Doctor</th>
+                                            <th>Time</th>
+                                            <th>Condition</th>
+                                            <th>Department</th>
+                                            <th></th>                                                
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% completed && completed.forEach(function(p) { %>
+                                                <tr>
+                                                    <td><img src="images/users/user-1.jpg" alt="" class="thumb-sm rounded-circle mr-2"><%=p.patientName%></td>                                                
+                                                    <td><%=p.patientMobile%></td>                                                
+                                                    <td><%=p.date%></td>
+                                                    <td><%=p.username%></td>
+                                                    <td><%=p.time%></td>
+                                                    <td><%=p.symptoms%></td> 
+                                                    <td><%=p.department %></td>                                               
+                                                </tr>
+                                                <% }); %>
+                                        </tbody>
+                                    </table>                    
+                                </div>                                         
+
+                            </div> 
+                        </div> 
+                    </div>                               
+                </div>       
+                <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title mt-0" id="myLargeModalLabel">Add New Shedule</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            </div>
+                            <div class="modal-body">
+                                <form method="POST" action='/bookConsultation'>
+                                    <div class="row">                                
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="DoctorName_select" class="mr-2">Doctor Name</label>
+                                                <select name="username" class="custom-select" id="DoctorName_select" required="">
+                                                    <option selected="">-- Select --</option>
+                                                    <option value="sharan">Dr.Sharan</option>
+                                                    <option value="sahil">Dr.Sahil</option>
+                                                    <option value="shreyas">Dr.Shreyas</option>
+                                                    <option value="sanjana">Dr.Sanjana</option>
+                                                </select>
+                                            </div>
+                                        </div> 
+                                        <div class="form-group" style="display: none;">
+                                            <label for="patientMobile" class="mr-2">Patient number</label>
+                                            <input name="patientMobile" type="text" class="form-control" id="patientMobile" required="" value="<%=patient.mobile%>">
+                                            <input name="patientName" type="text" class="form-control" id="patientName" required="" value="<%=patient.name%>">
+                                        </div>                                    
+                                    </div> 
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="Department_select" class="mr-2">Department</label>
+                                                <select name="department" class="custom-select" id="Department_select" required="">
+                                                    <option selected="">-- Select --</option>
+                                                    <option value="Orthopedic">Orthopedic</option>
+                                                    <option value="General">General Physician</option>
+                                                    <option value="Cardiology">Cardiology</option>
+                                                </select>
+                                            </div>
+                                        </div>                                    
+                                    </div>
+                                    <div class="row">  
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="date">Date</label>
+                                                <input name="date" type="date" class="form-control" id="date" required="">
+                                            </div>
+                                        </div>      
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="time" class="mr-2">Time</label>
+                                                <select name="time" class="custom-select" id="time">
+                                                    <option selected="">-- Select --</option>
+                                                    <option value="10-11">10-11</option>
+                                                    <option value="11-12">11-12</option>
+                                                    <option value="12-1">12-1</option>
+                                                    <option value="4-5">4-5</option>
+                                                    <option value="5-6">5-6</option>
+                                                    <option value="6-7">6-7</option>
+                                                </select>
+                                            </div>
+                                        </div>  
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="symptoms">Symptoms</label>
+                                                <textarea name="symptoms" class="form-control" rows="4" id="symptoms"></textarea>
+                                            </div>                                    
+                                        </div>
+                                    </div> 
+                                    <button type="submit" class="btn btn-sm btn-primary">Schedule</button>
+                                    <button type="button" data-toggle="modal" data-animation="bounce" data-target=".bs-example-modal-lg" class="btn btn-sm btn-danger">Cancel</button>
+                                </form>  
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<%- include("homeFoot") -%>
